@@ -26,7 +26,7 @@ public class FriendController : MonoBehaviour
     private Text friendTextField;
     private FriendTextGenerator friendTextGenerator;
     public string friendText;
-   // private UserInterfaceManager userInterfaceManager;
+    private UserInterfaceManager userInterfaceManager;
     #endregion
 
     PlayerController playerController;
@@ -39,7 +39,7 @@ public class FriendController : MonoBehaviour
 
     private void GetComponents()
     {
-        //userInterfaceManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UserInterfaceManager>();
+        userInterfaceManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<UserInterfaceManager>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
@@ -84,16 +84,14 @@ public class FriendController : MonoBehaviour
                 return;
             }
         }
-
-        //if (playerController.inFriendZone && PlayerStats.current.gainMultipleFriendsOnButtonPress)
-        //{
-        //    //Debug.Log("COULD BE FRIEND");
-        //    if (PlayerStats.current.multipleFriendsGainEnabled && Random.Range(0f, 1f) < PlayerStats.current.gainMultipleFriendsChance)
-        //    {
-        //        AddAreaOfEffectFriend();
-        //    }
-        //    return;
-        //}
+        if (playerController.inFriendZone && PlayerStats.current.gainMultipleFriendsOnButtonPress)
+        {
+            if (PlayerStats.current.multipleFriendsGainEnabled && Random.Range(0f, 1f) < PlayerStats.current.gainMultipleFriendsChance)
+            {
+                AddAreaOfEffectFriend();
+            }
+            return;
+        }
     }
 
     public void HurtPlayer()
@@ -103,33 +101,32 @@ public class FriendController : MonoBehaviour
         if (!canHurtPlayer)
             return;
         hasHurtPlayer = true;
-        //userInterfaceManager.AddLife(-1);
+        userInterfaceManager.AddLife(-1);
         DestroySelf();
     }
 
     private void AddRegularFriend()
     {
-       // userInterfaceManager.AddFriend();
-        //StartCoroutine(DestroyGainedFriendAfterDelay());
-
+        userInterfaceManager.AddFriend();
+        StartCoroutine(DestroyGainedFriendAfterDelay());
     }
 
     private void AddAreaOfEffectFriend()
     {
-       // userInterfaceManager.AddFriend();
-       // PlayerStats.current.multipleFriendsGainEnabled = false;
+        userInterfaceManager.AddFriend();
+        PlayerStats.current.multipleFriendsGainEnabled = false;
         DestroySelf();
     }
 
-    //private IEnumerator DestroyGainedFriendAfterDelay()
-    //{
-    //    if (PlayerStats.current.gainMultipleFriendsOnButtonPress)
-    //        PlayerStats.current.multipleFriendsGainEnabled = true;
-    //    canHurtPlayer = false;
-    //    yield return new WaitForSeconds(0.2f);
-    //    PlayerStats.current.multipleFriendsGainEnabled = false;
-    //    DestroySelf();
-    //}
+    private IEnumerator DestroyGainedFriendAfterDelay()
+    {
+        if (PlayerStats.current.gainMultipleFriendsOnButtonPress)
+            PlayerStats.current.multipleFriendsGainEnabled = true;
+        canHurtPlayer = false;
+        yield return new WaitForSeconds(0.2f);
+        PlayerStats.current.multipleFriendsGainEnabled = false;
+        DestroySelf();
+    }
 
     private void DestroySelf()
     {

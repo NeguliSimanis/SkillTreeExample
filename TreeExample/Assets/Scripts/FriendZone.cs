@@ -25,7 +25,6 @@ public class FriendZone : MonoBehaviour
             playerController.inFriendZone = true;
             if (!isInnerFriendZone)
             {
-                //Debug.Log("should activate friend zone");
                 friendController.ActivateFriendZone(true);
             }
             else

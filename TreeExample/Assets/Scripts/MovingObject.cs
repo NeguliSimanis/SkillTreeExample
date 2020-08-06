@@ -8,7 +8,7 @@ public class MovingObject : MonoBehaviour
 
     private void Update()
     {
-        //if (GameManager.instance.gameStarted)
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+        if (GameManager.instance.gameStarted)
+            transform.Translate(Vector2.left * speed * Time.deltaTime * GameManager.instance.gameSpeed);
     }
 }

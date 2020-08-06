@@ -51,22 +51,22 @@ public class PlayerStats
     public float gainLifeFromFriendChance = 0.1f;
 
     public List<PlayerSkill> playerSkills = new List<PlayerSkill>();
-    public int selectedSkillID = 1;
+    public int selectedSkillID = 0;
     public Sprite selectedSkillSprite;
     #endregion
 
     public PlayerStats()
     {
-        playerSkills.Add(new PlayerSkill("Confidence", 1, 3, true, "Increase your max confidence by 1", 0));
-        playerSkills.Add(new PlayerSkill("Exercise I", 2, 10, false, "Gain 1 confidence on every eighth jump", 1));
-        playerSkills.Add(new PlayerSkill("Public Speaker I", 3, 8, false, "10% chance to gain an additional friend", 1));
-        playerSkills.Add(new PlayerSkill("Elevating Confidence", 4, 15, false, "Increase your max confidence by 1", 2));
-        playerSkills.Add(new PlayerSkill("Everpresent Confidence", 5, 15, false, "Increase your max confidence by 1", 3));
-        playerSkills.Add(new PlayerSkill("Exercise II", 6, 30, false, "Gain 1 confidence on every fifth jump", 4));
-        playerSkills.Add(new PlayerSkill("Public Speaker II", 7, 30, false, "30% additional chance to gain an additional friend", 5));
+        playerSkills.Add(new PlayerSkill("Confidence", 0, 3, true, "Increase your max confidence by 1", -1));
+        playerSkills.Add(new PlayerSkill("Exercise I", 1, 10, false, "Gain 1 confidence on every eighth jump", 0));
+        playerSkills.Add(new PlayerSkill("Public Speaker I", 2, 8, false, "10% chance to gain an additional friend", 0));
+        playerSkills.Add(new PlayerSkill("Elevating Confidence", 3, 15, false, "Increase your max confidence by 1", 1));
+        playerSkills.Add(new PlayerSkill("Everpresent Confidence", 4, 15, false, "Increase your max confidence by 1", 2));
+        playerSkills.Add(new PlayerSkill("Exercise II", 5, 30, false, "Gain 1 confidence on every fifth jump", 3));
+        playerSkills.Add(new PlayerSkill("Public Speaker II", 6, 30, false, "30% additional chance to gain an additional friend", 4));
 
-        playerSkills.Add(new PlayerSkill("Positive Reinforcement I", 8, 20, false, "10% chance to gain 1 confidence when you find a friend", 3));
-        playerSkills.Add(new PlayerSkill("Positive Reinforcement II", 9, 40, false, "20% additional chance to gain 1 confidence when you find a friend", 8));
+        playerSkills.Add(new PlayerSkill("Positive Reinforcement I", 7, 20, false, "10% chance to gain 1 confidence when you find a friend", 2));
+        playerSkills.Add(new PlayerSkill("Positive Reinforcement II", 8, 40, false, "20% additional chance to gain 1 confidence when you find a friend", 7));
     }
 
     public void Reset()

@@ -14,7 +14,7 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField]
     GameObject endGameMenu;
     [SerializeField]
-    GameObject endGameCanvas;
+    GameObject mainMenu;
     [SerializeField]
     GameObject startMenu;
     #endregion
@@ -28,16 +28,18 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void InitializeManager()
     {
-        friendCount = GameObject.Find("friendCountText").GetComponent<Text>();
-        lifeText = GameObject.Find("lifeText").GetComponent<Text>();
+        friendCount = GameObject.Find("FriendCountText").GetComponent<Text>();
+        lifeText = GameObject.Find("LifeText").GetComponent<Text>();
         endGameMenu = GameObject.Find("GameOver");
-        endGameCanvas = GameObject.Find("MainMenu");
+        mainMenu = GameObject.Find("MainMenu");
         startMenu = GameObject.Find("StartPanel");
-        friendsFoundText = GameObject.Find("friendsFoundText").GetComponent<Text>();
-        charismaEarnedText = GameObject.Find("charismaEarnedText").GetComponent<Text>();
-        friendsFoundText2 = GameObject.Find("friendsFoundText (1)").GetComponent<Text>();
-        charismaEarnedText2 = GameObject.Find("charismaEarnedText (1)").GetComponent<Text>();
+        friendsFoundText = GameObject.Find("FriendsFoundText").GetComponent<Text>();
+        charismaEarnedText = GameObject.Find("CharismaEarnedText").GetComponent<Text>();
+        friendsFoundText2 = GameObject.Find("FriendsFoundText (1)").GetComponent<Text>();
+        charismaEarnedText2 = GameObject.Find("CharismaEarnedText (1)").GetComponent<Text>();
         endGameMenu.SetActive(false);
+
+        friendCount.text = "Friends: " + PlayerStats.current.currentFriends.ToString();
     }
 
     public void AddFriend()
@@ -74,13 +76,13 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void HideMainMenu()
     {
-        endGameCanvas.SetActive(false);
+        mainMenu.SetActive(false);
         startMenu.SetActive(false);
     }
 
     public void ShowEndGameUI()
     {
-        endGameCanvas.SetActive(true);
+        mainMenu.SetActive(true);
         endGameMenu.SetActive(true);
         friendsFoundText.text = "found " + PlayerStats.current.currentFriends + " friends";
         PlayerStats.current.SetEndGameStats();

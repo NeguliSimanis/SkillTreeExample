@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private PlayerController playerController;
     private UserInterfaceManager userInterfaceManager;
+    public float gameSpeed = 1f;
+    private float maxSpeed = 5f;
+    private float speedIncreaseRate = 0.01f; // cik strauji palielinās draugu kustības ātrums
+    private float nextSpeedIncreaseTime;
 
     private void Awake()
     {
@@ -44,6 +48,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerStats.current.Reset();
         gameStarted = false;
+        gameSpeed = 1f;
+        nextSpeedIncreaseTime = Time.time + 1f;
         userInterfaceManager = gameObject.GetComponent<UserInterfaceManager>();
         userInterfaceManager.InitializeManager();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -56,8 +62,11 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
+        if (gameStarted)
+        {
+            IncreaseGameSpeed();
+        }
     }
-
     public void StartGame()
     {
         userInterfaceManager.HideMainMenu();
@@ -76,4 +85,17 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    private void IncreaseGameSpeed()
+    {
+        if (Time.time < nextSpeedIncreaseTime)
+            return;
+        if (gameSpeed < maxSpeed)
+        {
+            gameSpeed += speedIncreaseRate;
+            Debug.Log("increasing speed to " + gameSpeed);
+        }
+    }
 }
+
+
